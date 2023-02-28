@@ -62,7 +62,7 @@ export const getServerSideProps = async ({
   params,
 }: GetServerSidePropsContext) => {
   const organizationId = params?.organizationId as string;
-
+  console.log('organizationId', organizationId);
   const [organization, jobs] = await Promise.all([
     getOrganization({ organizationId }).catch((err) => {
       console.log(err);
