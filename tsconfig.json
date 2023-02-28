@@ -1,0 +1,45 @@
+{
+  //  "extends": "./tsconfig-checks.json", way of extend some config
+  "compilerOptions": {
+    "target": "es5", // the standard in which we will compile our code
+    "lib": ["dom", "dom.iterable", "esnext"], // which types from Web API we will have (imports *.d.ts files)
+    "allowJs": true, // by default, we're looking for .ts, .tsx и .d.ts extensions, when flag is true, we're also looking for .js, .jsx
+    "skipLibCheck": true, // enabling --skipLibCheck can help work around these issues. Turning it on will prevent Typescript from type-checking the entire imported libraries. Instead, Typescript will only type-check the code you use against these types.
+    "strict": true, // flag enables a wide range of type checking behavior that results in stronger guarantees of program correctness
+    "forceConsistentCasingInFileNames": true, // works around cases like this fileManager.ts  and import ./FileManager.ts
+    "noEmit": true, // do not emit compiler output files like JavaScript source code, source-maps or declarations
+    "moduleResolution": "Node", // node | classic "'classic' used in TypeScript before the release of 1.6. You probably won’t need to use classic in modern code"
+    "resolveJsonModule": true, // allow import json files
+    "isolatedModules": true, // secure way to import smth to file and then export this value
+    "jsx": "preserve", // emit .jsx files with the JSX unchanged
+    "incremental": true, // save history of ts changes (WHERE?)
+    "esModuleInterop": true, // *** WTF is that?
+    "module": "esnext", // *** Module system of our APP UMD, CommonJS, esnext
+    "baseUrl": ".", // root directory where TS should find tsconfig
+    "paths": {
+      // the way to add aliases
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "src"], // compile files from thus directories
+  "exclude": ["node_modules"] // do not compile files from node_modules (should we use it if we're using include?)
+}
+
+/**
+  How it works together?
+  How I should setup my environment to test it all?
+*/
+
+/*
+ TS работает для компиляции
+ jsx, aliases, как будет выглядеть код и где запускаться, но что дальше?
+
+ где появляется babel?
+ что такое tsc
+ next & tsconfig
+
+ https://www.typescriptlang.org/docs/handbook/babel-with-typescript.html
+ Do you need a build pipeline with multiple potential outputs? Use babel for transpiling and tsc for type checking
+  dev and prod env (we should use babel, TS for type checking and babel for compiling)
+    ** how does react script works?
+*/
