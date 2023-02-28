@@ -21,6 +21,8 @@ const PublicOrganizationPage = ({
   organization,
   jobs,
 }: PublicOrganizationPageProps) => {
+  console.log('organization', organization);
+  console.log('jobs', jobs);
   if (!organization) return <NotFound />;
 
   return (
@@ -68,6 +70,11 @@ export const getServerSideProps = async ({
         organizationId: organizationId,
       },
     }).catch(() => [] as Job[]),
+  ]);
+
+  console.log('[organization, jobs]', [
+    organization,
+    jobs,
   ]);
 
   return {
