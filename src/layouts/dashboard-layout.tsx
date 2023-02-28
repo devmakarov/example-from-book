@@ -64,7 +64,7 @@ const Navbar = () => {
                 variant="solid"
                 href="/dashboard/jobs"
               >
-                Jobs
+                Info
               </Link>
             </HStack>
           </HStack>
