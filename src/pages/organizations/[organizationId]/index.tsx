@@ -64,12 +64,18 @@ export const getServerSideProps = async ({
   const organizationId = params?.organizationId as string;
 
   const [organization, jobs] = await Promise.all([
-    getOrganization({ organizationId }).catch(() => null),
+    getOrganization({ organizationId }).catch((err) => {
+      console.log(err);
+      return null;
+    }),
     getJobs({
       params: {
         organizationId: organizationId,
       },
-    }).catch(() => [] as Job[]),
+    }).catch((err) => {
+      console.log(err);
+      return [] as Job[];
+    }),
   ]);
 
   console.log('[organization, jobs]', [
