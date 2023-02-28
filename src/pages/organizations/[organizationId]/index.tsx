@@ -21,8 +21,6 @@ const PublicOrganizationPage = ({
   organization,
   jobs,
 }: PublicOrganizationPageProps) => {
-  console.log('organization', organization);
-  console.log('jobs', jobs);
   if (!organization) return <NotFound />;
 
   return (
@@ -62,25 +60,14 @@ export const getServerSideProps = async ({
   params,
 }: GetServerSidePropsContext) => {
   const organizationId = params?.organizationId as string;
-  console.log('organizationId', organizationId);
+
   const [organization, jobs] = await Promise.all([
-    getOrganization({ organizationId }).catch((err) => {
-      console.log(err);
-      return null;
-    }),
+    getOrganization({ organizationId }).catch(() => null),
     getJobs({
       params: {
         organizationId: organizationId,
       },
-    }).catch((err) => {
-      console.log(err);
-      return [] as Job[];
-    }),
-  ]);
-
-  console.log('[organization, jobs]', [
-    organization,
-    jobs,
+    }).catch(() => [] as Job[]),
   ]);
 
   return {
